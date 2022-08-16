@@ -1,0 +1,11 @@
+enabled: true
+
+title: "A Turing-complete programming language for Zero Knowledge Proofs."
+image: "/images/screenshot-2022-06-08-at-00-27-1.png"
+paragraphs:
+  - "Lurk is a statically scoped dialect of Lisp, influenced by Scheme and Common Lisp."
+  - "Lurk program execution can be proved in zero knowledge."
+  - "Lurk proofs support multiple backend SNARK proving systems."
+button:
+  label: "Lurk on Github"
+  link: "#"

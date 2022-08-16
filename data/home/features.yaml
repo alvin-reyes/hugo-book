@@ -1,0 +1,37 @@
+enabled: true
+
+title: "Lurk features*"
+cards:
+  - title: "Verifiable Computation"
+    text: >
+      Lurk programs prove that a computation was performed correctly. This
+      allows reliable outsourcing and verification of computation.
+
+  - title: "Zero Knowledge"
+    text: >
+      Lurk allows users to prove knowledge without revealing anything about
+      what is being proved other than the public inputs.
+
+  - title: "Content-Addressable Data"
+    text: >
+      Every Lurk Program has a unique content identifier (CID), enabling
+      integration with IPFS and IPLD.
+
+  - title: "Turing-Completeness"
+    text: >
+      Lurk proofs are not subject to the limitations of traditional
+      fixed-circuit SNARKs, and can (within hardware and run-time constraints)
+      take any program as input and produce an output and a proof.
+
+  - title: "Higher-Order Functions"
+    text: >
+      Higher-order functions can take one or more functions as input and return
+      a function as output. They can be used to create new functions, modify
+      existing ones, or even generate entire programs.
+
+  - title: "Computation over private data"
+    text: >
+      Lurk expressions can take private data as inputs to functons and return
+      provably correct outputs without compromising data privacy.
+
+text: "*Lurk is still in development and should not be used in production environments."

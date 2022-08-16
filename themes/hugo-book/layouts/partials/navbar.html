@@ -1,0 +1,33 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-inner flex align-center justify-between">
+      <a class="flex align-center" href="{{ cond (not .Site.Home.File) .Sites.First.Home.RelPermalink .Site.Home.RelPermalink }}">
+        {{- with .Site.Params.BookLogo -}}
+        <img src="{{ . | relURL }}" alt="Logo" />
+        {{- else -}}
+        <span>{{ .Site.Title }}</span>
+        {{- end -}}
+      </a>
+      <div class="navbar-menus flex">
+        <ul class="navbar-list navbar-menu-main">
+        {{ range .Site.Menus.main }}
+          <li class="navbar-item">
+            <a class="navbar-link ff-courier-new" href="{{ .URL }}">
+              {{ .Name }}
+            </a>
+          </li>
+        {{ end }}
+        </ul>
+        <ul class="navbar-list navbar-menu-after">
+        {{ range .Site.Menus.after }}
+          <li class="navbar-item">
+            <a class="navbar-link ff-courier-new" href="{{ .URL }}">
+              {{ .Name }}
+            </a>
+          </li>
+        {{ end }}
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

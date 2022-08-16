@@ -1,0 +1,10 @@
+enabled: true
+
+title: "Functional Commitments"
+text: >
+  Functional commitments are one application of Lurk’s ability to compute over
+  private data. In a functional commitment, a prover commits to a secret
+  function in a way that hides the function with a secret key and binds the
+  committer to correctly applying the function to inputs without changing the
+  function.
+image: "/images/screenshot-2022-06-08-at-01-26-1.png"

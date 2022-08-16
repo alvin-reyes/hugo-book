@@ -1,0 +1,48 @@
+/* You can add custom styles here. */
+
+.section {
+  position: relative;
+
+  .display-1 {
+    font-family: 'Artifika';
+    font-size: 2.5rem;
+  }
+
+  .display-2 {
+    font-family: 'Artifika';
+    font-size: 2.25rem;
+  }
+  
+  .display-3 {
+    font-family: 'Artifika';
+    font-size: 1.875rem;
+  }
+
+  p {
+    font-family: "TeX Gyre Pagella", serif;
+    font-size: 1.25rem;
+  }
+
+  .bg-separator {
+    position: absolute;
+    top: 3rem;
+
+    width: 100%;
+    height: 7.375rem;
+    background-color: #F3F4F5;
+    z-index: -1;
+  }
+}
+
+.ff-courier-new {
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+// @import "plugins/numbered";
+

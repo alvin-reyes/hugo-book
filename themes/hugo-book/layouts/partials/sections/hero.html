@@ -1,0 +1,22 @@
+<section class="section hero">
+  <div class="container">
+    <h1 class="hero-title display-1">{{ .title }}</h1>
+    <div class="hero-image row">
+      <div class="column-12">
+        <img src="{{ .image }}" alt="Screenshot">
+      </div>
+    </div>
+    <div class="hero-paragraphs row">
+      <div class="column-12">
+        {{ range .paragraphs }}
+          <p class="hero-paragraph">{{ . }}</p>
+        {{ end }}
+      </div>
+    </div>
+    <div class="hero-button row">
+      <div class="column-12 text-center">
+        <a class="btn" href="{{ .button.link }}">{{ .button.label }}</a>
+      </div>
+    </div>
+  </div>
+</section>

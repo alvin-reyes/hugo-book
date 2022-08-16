@@ -1,0 +1,22 @@
+enabled: true
+
+title: "Getting Started with Lurk"
+cards:
+  - image: "/images/lambda.svg"
+    title: "Language Specification"
+    text: >
+      Learn more about Lurk’s language specification
+    link: "#"
+    
+  - image: "/images/github.svg"
+    title: "GitHub"
+    text: >
+      View the source code on Github
+    link: "#"
+    
+  - image: "/images/wa.svg"
+    title: "WASM Evaluator"
+    text: >
+      Test out the Lurk expression evaluator
+    link: "#"
+    

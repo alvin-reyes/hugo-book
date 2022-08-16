@@ -1,0 +1,43 @@
+{{ define "main" }}
+  <section class="section pages-single">
+    <div class="bg-pages-separator">
+    </div>
+
+    <div class="container">
+      <div class="navigation">
+        <div class="prev">
+        {{ with .PrevInSection }}
+          <a class="" href="{{ .Permalink }}">< Back </a>
+        {{ end }}
+        </div>
+        <div class="next">
+        {{ with .NextInSection }}
+          <a class="" href="{{ .Permalink }}">Next ></a>
+        {{ end }}
+        </div>
+      </div>
+      <article class="pages-content">
+        <div class="page-meta">
+          {{ .Date.Format "2006-01-02" }} {{ with .Params.Author }} / {{ . }} {{ end }}
+        </div>
+        <h2 class="page-title">
+          {{ partial "docs/title.html" . }}
+        </h2>
+        {{ with .Params.description }}
+          <div class="page-description">
+            {{ . | markdownify }}
+          </div>
+        {{ end }}
+        <div class="markdown">
+          {{- .Content -}}
+        </div>
+      </article>
+    </div>
+  </section>
+
+  {{ partial "related" . }}
+{{ end }}
+
+{{ define "toc" }}
+  {{ partial "docs/toc" . }}
+{{ end }}

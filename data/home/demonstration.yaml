@@ -1,0 +1,7 @@
+enabled: true
+
+title: "Verifiable Computation"
+text: >
+  Lurk allows outsourced computations to be easily proved. Check out the
+  demonstration below to see Lurk evaluation, proving, and verification.
+component: "<img src='/images/demonstration-custom-component.png' alt='Custom Component'>"
