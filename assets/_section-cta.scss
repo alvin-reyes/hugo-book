@@ -1,0 +1,43 @@
+.section.cta {
+  margin-bottom: 3rem;
+
+  .bg-separator {
+    top: 5rem;
+    height: 9.25rem;
+  }
+  .cta-card-image {
+    padding: 0 30%;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .cta-title {
+    margin-bottom: 4rem;
+  }
+  .cta-card {
+    display: block;
+
+    margin: 1rem 3.125rem;
+    padding: 3rem 0.875rem;
+
+    min-height: 22rem;
+
+    color: #000000;
+    text-align: center;
+
+    border: 1px solid #000000;
+    box-shadow: 6px 6px 0 0 #000000;
+    background-color: #FFFFFF;
+  }
+
+  .cta-card-title {
+    font-family: 'Artifika';
+    font-size: 1.125rem;
+  }
+  .cta-card-text {
+    font-family: "TeX Gyre Pagella", serif;
+    font-size: 1.25rem;
+  }
+}

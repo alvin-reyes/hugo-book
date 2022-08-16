@@ -1,1 +1,31 @@
-{{ define "dummy" }}{{ end }}
+{{ define "main" }}
+  <section class="section pages-list">
+    <div class="bg-pages-separator">
+    </div>
+
+    <div class="container">
+      {{ range (sort .Paginator.Pages "Date" "desc") }}
+        <article class="pages-list-item">
+          <div class="page-meta">
+            {{ .Date.Format "2006-01-02" }} {{ with .Params.Author }} / {{ . }} {{ end }}
+          </div>
+          <h2 class="page-title">
+            <a href="{{ .Permalink }}">{{ partial "docs/title.html" . }}</a>
+          </h2>
+          <p class="page-description">
+            {{- .Summary -}}
+          </p>
+          <a class="page-read-more button" href="{{ .Permalink }}"><span class="gray">(</span>Read <span class="green">more</span><span class="gray">)</span></a>
+        </article>
+      {{ end }}
+    </div>
+
+    {{ partial "pagination.html" . }}
+  </section>
+
+  {{ partial "related" . }}
+{{ end }}
+
+{{ define "toc" }}
+  {{ partial "docs/taxonomy" . }}
+{{ end }}

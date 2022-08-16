@@ -1,0 +1,20 @@
+<section class="section cta">
+  <div class="bg-separator">
+  </div>
+  <div class="container">
+    <div class="row">
+      <h2 class="cta-title display-1">{{ .title }}</h3>
+      {{ range .cards }}
+        <div class="column-12 column-lg-4">
+          <a class="cta-card" href="{{ .link }}">
+            <div class="cta-card-image">
+              <img src="{{ .image }}" alt="Card Icon">
+            </div>
+            <h4 class="cta-card-title">{{ .title }}</h3>
+            <p class="cta-card-text">{{ .text }}</p>
+          </a>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

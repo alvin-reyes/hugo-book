@@ -1,0 +1,25 @@
+{{ $related := .Site.RegularPages.RelatedIndices . | first 4 }}
+{{ with $related }}
+  <div class="section related">
+    <div class="bg-related-separator">
+    </div>
+    <div class="container">
+      <div class="row related-title">
+        <div class="column-12 column-lg-3">
+          <h2 class="display-2">Related<br>Posts</h2>
+        </div>
+      </div>
+      <div class="row related-list">
+          {{ range . }}
+            <div class="column-12 column-lg-3">
+              <div class="related-card">
+                <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                <p class="card-summary">{{ .Summary | truncate 100 }}</p>
+                <a class="card-button" href="{{ .Permalink }}">Read more</a>
+              </div>
+            </div>
+          {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

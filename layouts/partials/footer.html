@@ -1,0 +1,31 @@
+<nav class="footer">
+  <div class="container">
+    <div class="footer-inner flex align-center justify-between">
+      <div class="flex align-center">
+        <a class="" href="{{ cond (not .Site.Home.File) .Sites.First.Home.RelPermalink .Site.Home.RelPermalink }}">
+          {{- with .Site.Params.BookLogo -}}
+          <img class="footer-logo" src="{{ . | relURL }}" alt="Logo" />
+          {{- else -}}
+          <span>{{ .Site.Title }}</span>
+          {{- end -}}
+        </a>
+        {{- with .Site.Params.copyright -}}
+          <span class="block footer-copyright ff-courier-new">
+            {{ . }}
+          </span>
+      {{- end -}}
+      </div>
+      <div class="footer-menus flex">
+        <ul class="footer-list footer-menu-main">
+        {{ range .Site.Menus.footer }}
+          <li class="footer-item">
+            <a class="footer-link ff-courier-new" href="{{ .URL }}">
+              {{ .Name }}
+            </a>
+          </li>
+        {{ end }}
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
