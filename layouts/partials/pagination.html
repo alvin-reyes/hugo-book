@@ -6,11 +6,11 @@
 
       {{- with .Prev }}
         <li class="page-item page-prev">
-          <a href="{{ .URL }}" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo; Previous</span></a>
+          <a href="{{ .URL }}" aria-label="Previous" class="page-link" role="button">&laquo; <span class="prev-label">Previous</span></a>
         </li>
       {{- else }}
         <li class="page-item page-prev disabled">
-          <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo; Previous</span></a>
+          <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1">&laquo; <span class="prev-label">Previous</span></a>
         </li>
       {{- end }}
 
@@ -39,11 +39,11 @@
 
       {{- with .Next }}
         <li class="page-item page-next">
-          <a href="{{ .URL }}" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">Next &raquo;</span></a>
+          <a href="{{ .URL }}" aria-label="Next" class="page-link" role="button"><span class="next-label">Next</span> &raquo;</a>
         </li>
       {{- else }}
         <li class="page-item page-next disabled">
-          <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">Next &raquo;</span></a>
+          <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span class="next-label">Next</span> &raquo;</a>
         </li>
       {{- end }}
 

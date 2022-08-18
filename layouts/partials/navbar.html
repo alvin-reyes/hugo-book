@@ -1,3 +1,5 @@
+<div class="insersection-mark">
+</div>
 <header class="navbar">
   <div class="navbar-container">
     <div class="navbar-inner">
@@ -5,33 +7,127 @@
         <img class="navbar-logo-image" src="/images/logo-lurk.svg">
       </a>
       <div class="navbar-menu">
-        <div class="navbar-item">
-          <a class="navbar-link" href="/blog-detail">Blog</a>
-        </div>
-        <div class="navbar-item">
-          <a class="navbar-link" href="/blog-detail">FAQ</a>
-        </div>
-        <div class="navbar-item">
-          <div class="navbar-dropdown">
-            <div class="navbar-dropdown-button" aria-describedby="secondary-pages">
-              <p class="navbar-dropdown-label">Spec</p>
-              <svg class="navbar-dropdown-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="ExpandMoreIcon" style="font-family: &quot;Courier New&quot;; font-style: normal; font-weight: 700; font-size: 24px; line-height: 27px; color: rgb(0, 0, 0);"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
+        {{ range .Site.Menus.main }}
+          {{ if .Children }}
+            <div class="navbar-item">
+              <div class="navbar-dropdown">
+                <div class="navbar-dropdown-button">
+                  <p class="navbar-dropdown-label">{{ .Name }}</p>
+                  <svg class="navbar-dropdown-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="ExpandMoreIcon" style="font-family: &quot;Courier New&quot;; font-style: normal; font-weight: 700; font-size: 24px; line-height: 27px; color: rgb(0, 0, 0);"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
+
+                  <div class="navbar-dropdown-content hide">
+                    <div class="navbar-dropdown-inner">
+                      {{ range .Children }}
+                      <div class="navbar-dropdown-item">
+                        <a class="navbar-dropdown-link" target="_blank" href="{{ .URL }}">{{ .Name }}</a>
+                      </div>
+                      {{ end }}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          {{ else }}
+            <div class="navbar-item">
+              <a class="navbar-link" href="{{ .URL }}">{{ .Name }}</a>
+            </div>
+          {{ end }}
+        {{ end }}
+        {{ range .Site.Menus.after }}
         <div class="navbar-item">
-          <a class="navbar-link navbar-button" href="/blog-detail">
-            Github
+          <a class="navbar-link navbar-button" href="{{ .URL }}">
+            {{ .Name }}
             <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
           </a>
         </div>
+        {{ end }}
       </div>
-      <div class="navbar-mobile-button">
-        <button class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-pmubvg-MuiButtonBase-root-MuiButton-root" tabindex="0" type="button" aria-label="Menu">
-          <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="MenuIcon"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
-          <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
+      <div class="navbar-menu-mobile">
+        <button class="navbar-mobile-button" tabindex="0" type="button" aria-label="Menu">
+          <svg class="navbar-mobile-image" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="MenuIcon"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
         </button>
+        <div class="navbar-menu-mobile-overlay hide">
+          <div class="navbar-menu-mobile-content hide">
+            <div class="menu-mobile-logo">
+              <a href="/" title="LurkLang">
+                <img src="/images/logo-lurk.svg">
+              </a>
+            </div>
+            <div class="menu-mobile-list">
+              {{ range .Site.Menus.main }}
+                {{ if .Children }}
+                  <div class="menu-mobile-item">
+                    <div class="navbar-mobile-dropdown">
+                      <div class="navbar-mobile-dropdown-button">
+                        <p class="navbar-mobile-dropdown-label">{{ .Name }}</p>
+                        <svg class="navbar-mobile-dropdown-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="ExpandMoreIcon" style="font-family: &quot;Courier New&quot;; font-style: normal; font-weight: 700; font-size: 24px; line-height: 27px; color: rgb(0, 0, 0);"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
+                        <div class="navbar-mobile-dropdown-content hide">
+                          {{ range .Children }}
+                            <div class="navbar-mobile-dropdown-item">
+                              <a class="navbar-mobile-dropdown-link" target="_blank" href="{{ .URL }}">{{ .Name }}</a>
+                            </div>
+                          {{ end }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {{ else }}
+                  <div class="menu-mobile-item">
+                    <a href="{{ .URL }}"class="menu-mobile-link">
+                      {{ .Name }}
+                    </a>
+                  </div>
+                {{ end }}
+              {{ end }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </header>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Dropdowns in desktop menu
+  const dropdownButtons = document.querySelectorAll(".navbar-dropdown-button");
+
+  for ( button of dropdownButtons ) {
+    button.addEventListener("click", (e) => {
+      e.currentTarget.querySelector(".navbar-dropdown-content").classList.toggle("hide");
+    });
+  }
+
+  // Mobile menu
+  const mobileButton = document.querySelector(".navbar-mobile-button");
+  mobileButton.addEventListener("click", toggleMenuMobile);
+
+  const mobileOverlay = document.querySelector(".navbar-menu-mobile-overlay");
+  mobileOverlay.addEventListener("click", (e) => {
+    if ( e.target === e.currentTarget )
+      toggleMenuMobile();
+  });
+
+  // Dropdowns inside mobile menu
+  const dropdownMobileButtons = document.querySelectorAll(".navbar-mobile-dropdown-button");
+
+  for ( button of dropdownMobileButtons ) {
+    button.addEventListener("click", (e) => {
+      e.currentTarget.querySelector(".navbar-mobile-dropdown-content").classList.toggle("hide");
+    });
+  }
+});
+
+function toggleMenuMobile() {
+  const mobileOverlay = document.querySelector(".navbar-menu-mobile-overlay");
+  const mobileContent = document.querySelector(".navbar-menu-mobile-content");
+
+  if ( mobileOverlay.classList.contains("hide") ) {
+    mobileOverlay.classList.remove("hide");
+    setTimeout( () => mobileContent.classList.remove("hide"), 100);
+  } else {
+    mobileContent.classList.add("hide");
+    setTimeout( () => mobileOverlay.classList.add("hide"), 100);
+  }
+}
+</script>
