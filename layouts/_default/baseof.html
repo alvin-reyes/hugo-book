@@ -5,19 +5,22 @@
   {{ partial "docs/inject/head" . }}
 </head>
 <body dir="{{ default "ltr" .Site.Language.LanguageDirection }}">
-  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <!-- <input type="checkbox" class="hidden toggle" id="menu-control" /> -->
   <input type="checkbox" class="hidden toggle" id="toc-control" />
-  <main class="container flex">
+  {{ partial "navbar" . }}
+  <main class="flex">
+    {{ if default true (default .Site.Params.BookMenu .Params.BookMenu) }}
     <aside class="book-menu">
       <div class="book-menu-content">
         {{ template "menu" . }} <!-- Left menu Content -->
       </div>
     </aside>
+    {{ end }}
 
-    <div class="book-page">
-      <header class="book-header">
-        {{ template "header" . }} <!-- Mobile layout header -->
-      </header>
+    <div class="book-page px-0">
+      <!-- <header class="book-header"> -->
+      <!--   {{ template "header" . }} <!-1- Mobile layout header -1-> -->
+      <!-- </header> -->
 
       {{ partial "docs/inject/content-before" . }}
       {{ template "main" . }} <!-- Page Content -->
@@ -30,7 +33,7 @@
 
       {{ template "comments" . }} <!-- Comments block -->
 
-      <label for="menu-control" class="hidden book-menu-overlay"></label>
+      <!-- <label for="menu-control" class="hidden book-menu-overlay"></label> -->
     </div>
 
     {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
@@ -81,3 +84,5 @@
 {{ define "toc" }}
   {{ partial "docs/toc" . }}
 {{ end }}
+
+{{ partial "footer" . }}

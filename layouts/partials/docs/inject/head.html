@@ -1,0 +1,19 @@
+<script>
+document.addEventListener("DOMContentLoaded",  () => {
+  const navbar = document.querySelector(".navbar");
+  const mark = document.querySelector(".insersection-mark");
+
+  const observer = new IntersectionObserver((entities) => {
+
+    for ( const entity of entities ) {
+      if (entity.isIntersecting) {
+        navbar.classList.remove("navbar-shadow");
+      } else {
+        navbar.classList.add("navbar-shadow");
+      }
+    }
+  });
+
+  observer.observe(mark);
+});
+</script>

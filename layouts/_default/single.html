@@ -1,1 +1,28 @@
-{{ define "dummy" }}{{ end }}
+{{ define "main" }}
+  <section class="section pages-single">
+    <div class="bg-pages-separator">
+    </div>
+
+    <div class="container">
+      <article class="pages-content">
+        <h2 class="page-title">
+          {{ partial "docs/title.html" . }}
+        </h2>
+        {{ with .Params.description }}
+          <div class="page-description">
+            {{ . | markdownify }}
+          </div>
+        {{ end }}
+        <div class="markdown">
+          {{- .Content -}}
+        </div>
+      </article>
+    </div>
+  </section>
+
+  {{ partial "related" . }}
+{{ end }}
+
+{{ define "toc" }}
+  {{ partial "docs/toc" . }}
+{{ end }}

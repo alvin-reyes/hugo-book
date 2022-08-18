@@ -1,0 +1,57 @@
+.section.related {
+  margin-bottom: 8.75rem;
+
+  .bg-related-separator {
+    position: absolute;
+    top: 8rem;
+
+    width: 100%;
+    height: 7.375rem;
+    background-color: #F3F4F5;
+    z-index: -1;
+  }
+
+  .related-card {
+    padding: 1.75rem 1.125rem;
+    margin-bottom: 1rem;
+    text-align: center;
+
+    border: solid #000000 1px;
+    border-radius: 2px;
+    box-shadow: 6px 6px 0 0 #000000;
+    background-color: #FFFFFF;
+
+    .card-title {
+      margin-bottom: 3.25rem;
+
+      font-family: 'TeX Gyre Pagella';
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1.6875rem;
+
+      a {
+        color: #000000;
+      }
+    }
+    .card-summary {
+      margin-bottom: 1.25rem;
+
+      font-family: 'TeX Gyre Pagella';
+      font-size: 1.0625rem;
+      line-height: 1.6875rem;
+    }
+
+    .card-button {
+      display: inline-block;
+      padding: .6rem 1.8rem;
+
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700;
+      font-size: 1.1875rem;
+      color: white;
+
+      background-color: var(--body-font-color);
+      border-radius: 2px;
+    }
+  }
+}

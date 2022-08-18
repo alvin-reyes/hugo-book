@@ -1,0 +1,203 @@
+.pages-list {
+  margin-bottom: 9.625rem;
+
+  .bg-pages-separator {
+    position: absolute;
+    top: -2.375rem;
+
+    width: 100%;
+    height: 10rem;
+    background-color: #F3F4F5;
+    z-index: -1;
+  }
+}
+
+.pages-list-item {
+  margin-bottom: 4.75rem;
+  padding: 2.375rem 3rem;
+
+  border: solid #000000 1px;
+  border-radius: 2px;
+  box-shadow: 6px 6px 0 0 #000000;
+  background-color: #FFFFFF;
+
+
+  .page-meta {
+    margin-bottom: 0.5rem;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.0625rem;
+    font-weight: 700;
+  }
+
+  .page-title {
+    margin-bottom: 2rem;
+
+    a {
+      color: #000000;
+      font-size: 2rem;
+      font-family: "TeX Gyre Pagella", serif;
+    }
+  }
+
+  .page-description {
+    margin-bottom: 2rem;
+    font-size: 1.0625rem;
+    font-family: "TeX Gyre Pagella", serif;
+    font-weight: 700;
+    line-height: 1.6875rem;
+  }
+  .page-read-more {
+    display: inline-block;
+    padding: .6rem 1.8rem;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 1.1875rem;
+    color: white;
+
+    background-color: var(--body-font-color);
+    border-radius: 2px;
+
+    .gray {
+      color: #8D949D;
+    }
+
+    .green {
+      color: #98E391;
+    }
+  }
+}
+
+.pagination {
+  justify-content: space-between !important;
+
+  .page-item,
+  .page-item.page-prev,
+  .page-item.page-next {
+    a {
+      font-family: 'Courier New';
+      font-weight: 700;
+      font-size: 1.0625rem;
+      line-height: 1.6875rem;
+
+      text-align: center;
+      color: #000000;
+    }
+
+    .prev-label,
+    .next-label {
+      display: none;
+
+      @media (min-width: 900px) {
+        display: inline;
+      }
+    }
+  }
+
+  .page-item.page-number {
+    margin: 0 0.75rem;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      background: #FFFFFF;
+      border: 1px solid #000000;
+    }
+
+    &.active {
+      a {
+        color: #FFFFFF;
+        background-color: #000000;
+      }
+    }
+  }
+}
+
+.section.pages-single {
+
+  .bg-pages-separator {
+    position: absolute;
+    top: -4rem;
+
+    width: 100%;
+    height: 16rem;
+    background-color: #F3F4F5;
+    z-index: -1;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0.75rem 0;
+
+    font-family: 'Courier New';
+    font-weight: 700;
+    font-size: 1.0625rem;
+    line-height: 1.6875rem;
+
+    a {
+      color: #000000;
+    }
+  }
+}
+
+.pages-content {
+  margin-bottom: 4.75rem;
+  padding: 3.125rem 1rem;
+
+  @media (min-width: 900px) {
+    padding: 3.125rem 4.25rem;
+  }
+
+  background-color: #FFFFFF;
+  border: solid #000000 1px;
+  border-radius: 2px;
+
+
+
+  .page-meta {
+    margin-bottom: 1.25rem;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.0625rem;
+    font-weight: 700;
+  }
+
+  .page-title {
+    margin-bottom: 4.25rem;
+
+    font-family: 'Artifika';
+    font-weight: 400;
+    font-size: 3.4375rem;
+    line-height: 4.1875rem;
+  }
+
+  .page-description {
+    margin-bottom: 4.25rem;
+    padding: 2.625rem;
+
+    font-size: 1.0625rem;
+    font-family: "TeX Gyre Pagella", serif;
+    font-weight: 700;
+    line-height: 1.6875rem;
+
+    background: #F3F4F5;
+  }
+
+  .markdown {
+    h1, h2, h3, h4, h5, h6 {
+      font-family: "TeX Gyre Pagella", serif;
+      font-weight: 700;
+    }
+  }
+
+  .mermaid {
+    max-width: 100%;
+    overflow-x: scroll;
+  }
+}
