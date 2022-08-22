@@ -1,0 +1,43 @@
+{{ $related := .Site.RegularPages.RelatedIndices . | first 4 }}
+{{ with $related }}
+  <div class="section related {{ if site.Params.dark }}dark{{ end }}">
+    <div class="bg-related-separator">
+    </div>
+    <div class="container">
+      <div class="row related-title">
+        <div class="column-12 column-lg-3">
+          <h2 class="display-2">Related<br>Posts</h2>
+        </div>
+      </div>
+      <div class="row related-list">
+        {{ range . }}
+          <div class="column-12 column-lg-3 blog-column">
+            <article class="blog-item">
+              <div class="">
+                <div class="blog-image">
+                {{ if .Params.image }}
+                  <img class="" src="{{ .Params.image }}" alt="{{ .Title }}">
+                {{ else }}
+                  <img class="" src="" alt="">
+                {{ end }}
+                </div>
+                {{ if site.Params.showDate }}
+                <div class="blog-date">
+                  {{ .Date.Format "2006-01-02" }} {{ with .Params.Author }} / {{ . }} {{ end }}
+                </div>
+                {{ end }}
+                <h2 class="blog-title">
+                  <a href="{{ .Permalink }}">{{ partial "docs/title.html" . }}</a>
+                </h2>
+              </div>
+              <p class="blog-description">
+                {{- .Summary | truncate 80 -}}
+              </p>
+              <a class="blog-read-more button" href="{{ .Permalink }}">(Read more)</a>
+            </article>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

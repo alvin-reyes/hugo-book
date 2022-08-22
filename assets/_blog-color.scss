@@ -1,0 +1,216 @@
+.blog-list-search {
+  position: absolute;
+  top: 2rem;
+  width: 100%;
+  z-index: 1;
+}
+
+.blog-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 30rem;
+  padding: 2rem 0;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+
+  .hero-title {
+    font-size: 2.5rem;
+    font-family: "Artifika", serif;
+    font-weight: 400;
+    color: #FFFFFF;
+  }
+
+  .hero-description {
+    margin-bottom: 3rem;
+
+    font-size: 1.25rem;
+    font-family: "TeX Gyre Pagella", serif;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+
+  .hero-button {
+    align-self: center;
+    display: inline-block;
+    margin-bottom: 2rem;
+    padding: .6rem 1.8rem;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 1.1875rem;
+    color: white;
+
+    color: #000000;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+  }
+}
+
+.bg-pages-separator {
+  width: 100%;
+  height: 10rem;
+  margin-bottom: 2rem;
+  background-color: #F3F4F5;
+}
+
+.blog-list {
+  margin-bottom: 9.625rem;
+
+}
+
+.blog-column {
+  margin-bottom: 3rem;
+}
+
+.blog-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin-left: 1rem;
+  margin-right: 1rem;
+
+  border: solid #000000 1px;
+  border-radius: 2px;
+  background-color: #FFFFFF;
+
+  text-align: center;
+
+  height: 100%;
+
+  .blog-image {
+    img {
+      display: block;
+      width: 100%;
+      height: 12.5rem;
+      object-fit: cover;
+      object-position: center;
+    }
+    margin-bottom: 0.5rem;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.0625rem;
+    font-weight: 700;
+  }
+
+  .blog-date {
+    margin-bottom: -1.5rem;
+    font-family: Courier New;
+    font-size: 0.5625rem;
+    font-weight: 700;
+    line-height:1.6875rem;
+    letter-spacing: 0em;
+  }
+
+  .blog-title {
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+
+    a {
+      color: #000000;
+      font-size: 1.25rem;
+      font-family: "TeX Gyre Pagella", serif;
+      font-weight: 700;
+    }
+  }
+
+  .blog-description {
+    margin-bottom: 2rem;
+    padding: 0 2rem;
+    font-size: 1.0625rem;
+    font-family: "TeX Gyre Pagella", serif;
+    line-height: 1.6875rem;
+  }
+  .blog-read-more {
+    align-self: center;
+    display: inline-block;
+    margin-bottom: 2rem;
+    padding: .6rem 1.8rem;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 1.1875rem;
+    color: white;
+
+    background-color: var(--body-font-color);
+    border-radius: 2px;
+
+    .gray {
+      color: #8D949D;
+    }
+
+    .green {
+      color: #98E391;
+    }
+  }
+}
+
+.pages-single-color {
+  .page-hero {
+    margin-left: -1rem;
+    margin-right: -1rem;
+
+    @media (min-width: 900px) {
+      margin-left: -4.25rem;
+      margin-right: -4.25rem;
+    }
+
+    img {
+      width: 100%;
+      height: 24rem;
+
+      object-fit: cover;
+      object-position: center;
+
+      box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .page-description {
+    margin-left: -1rem;
+    margin-right: -1rem;
+
+    @media (min-width: 900px) {
+      margin-left: -4.25rem;
+      margin-right: -4.25rem;
+    }
+  }
+}
+
+.page-title-author {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+  }
+
+  .page-author {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    img {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+    }
+
+    .author-name {
+      font-family: "TeX Gyre Pagella";
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 27px;
+      letter-spacing: 0em;
+      text-align: center;
+    }
+  }
+}

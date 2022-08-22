@@ -1,0 +1,80 @@
+{{ define "main" }}
+  <!-- Search -->
+  <section class="blog-color blog-list-search ">
+    <div class="container">
+      <div class="flex justify-end">
+        {{ partial "docs/search" . }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Blog Hero -->
+  <section 
+    class="section blog-color blog-hero {{ if .Site.Params.dark }}dark{{ end }}"
+    {{ with .Params.image }}
+      {{ if site.Params.dark }}
+      style="background-image: linear-gradient(black, black), url({{ . }}); background-size: cover; background-blend-mode: saturation;"
+      {{ else }}
+      style="background-image: url({{ . }});"
+      {{ end }}
+    {{ end }}
+  >
+    <div class="container">
+      <div class="row align-center">
+        <div class="hero-container column-12 column-lg-6">
+          <div>
+            <h1 class="hero-title">{{ .Params.heroTitle }}</h1>
+            <p class="hero-description">{{ .Params.heroDescription }}</p>
+          </div>
+          <a class="hero-button" href="{{ .Params.buttonLink }}">(Read more)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bg-pages-separator">
+  </div>
+
+  <!-- Section Blog List -->
+  <section class="section blog-color blog-list {{ if .Site.Params.dark }}dark{{ end }}">
+    <div class="container">
+      <div class="row">
+        {{ range (sort .Paginator.Pages "Date" "desc") }}
+          <div class="column-12 column-lg-4 blog-column">
+            <article class="blog-item">
+              <div class="">
+                <div class="blog-image">
+                {{ if .Params.image }}
+                  <img class="" src="{{ .Params.image }}" alt="{{ .Title }}">
+                {{ else }}
+                  <img class="" src="" alt="">
+                {{ end }}
+                </div>
+                {{ if site.Params.showDate }}
+                <div class="blog-date">
+                  {{ .Date.Format "2006-01-02" }} {{ with .Params.Author }} / {{ . }} {{ end }}
+                </div>
+                {{ end }}
+                <h2 class="blog-title">
+                  <a href="{{ .Permalink }}">{{ partial "docs/title.html" . }}</a>
+                </h2>
+              </div>
+              <p class="blog-description">
+                {{- .Summary | truncate 80 -}}
+              </p>
+              <a class="blog-read-more button" href="{{ .Permalink }}">(Read more)</a>
+            </article>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+
+    {{ partial "pagination.html" . }}
+  </section>
+
+  {{ partial "related-color" . }}
+{{ end }}
+
+{{ define "toc" }}
+  {{ partial "docs/taxonomy" . }}
+{{ end }}
