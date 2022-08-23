@@ -190,6 +190,8 @@
   }
 
   .markdown {
+    margin-top: 3rem;
+
     h1, h2, h3, h4, h5, h6 {
       font-family: "TeX Gyre Pagella", serif;
       font-weight: 700;
@@ -199,5 +201,11 @@
   .mermaid {
     max-width: 100%;
     overflow-x: scroll;
+  }
+}
+
+.dark {
+  img {
+    filter: grayscale(1);
   }
 }
