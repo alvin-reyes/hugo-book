@@ -1,0 +1,19 @@
+{
+  "name": "hugo-book",
+  "version": "1.0.0",
+  "description": "[![Hugo](https://img.shields.io/badge/hugo-0.68-blue.svg)](https://gohugo.io) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) ![Build with Hugo](https://github.com/alex-shpak/hugo-book/workflows/Build%20with%20Hugo/badge.svg)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvin-reyes/hugo-book.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alvin-reyes/hugo-book/issues"
+  },
+  "homepage": "https://github.com/alvin-reyes/hugo-book#readme"
+}

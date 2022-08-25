@@ -1,0 +1,24 @@
+{
+  "name": "lurk",
+  "collaborators": [
+    "porcuquine <porcuquine@gmail.com>"
+  ],
+  "description": "Turing-Complete Zero Knowledge",
+  "version": "0.1.1",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lurk-lang/lurk-rs"
+  },
+  "files": [
+    "index_bg.wasm",
+    "index.js",
+    "index_bg.js",
+    "index.d.ts",
+    "LICENSE-APACHE",
+    "LICENSE-MIT"
+  ],
+  "module": "index.js",
+  "types": "index.d.ts",
+  "sideEffects": false
+}
