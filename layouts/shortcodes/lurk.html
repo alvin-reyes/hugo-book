@@ -1,0 +1,27 @@
+{{ if not (.Page.Scratch.Get "lurk") }}
+  {{ $highlightLisp := resources.Get "lurk-component/static/highlight-lisp/highlight-lisp.js" }}
+  <script type="text/javascript" src="{{ $highlightLisp.Permalink }}"></script>
+
+  {{ $highlightLispTheme := resources.Get "lurk-component/static/highlight-lisp/themes/github.css" }}
+  <link rel="stylesheet" href="{{ $highlightLispTheme.Permalink }}" type="text/css" media="all">
+
+  {{ $lurkCss := resources.Get "lurk-component/static/css/lurk.css" }}
+  <link rel="stylesheet" href="{{ $lurkCss.Permalink }}" type="text/css" media="all">
+
+  {{ $lurkJs := resources.Get "lurk-component/js/index.js" | js.Build }}
+  <script type="module" src="{{ $lurkJs.Permalink }}"></script>
+
+  {{ $wasm := resources.Get "lurk-component/js/wasm-worker.js" }}
+  {{ $wasm.Publish }}
+
+  <div class="lurk-code-component">
+    <button id="reset" class="button"></button>
+    <button id="run" class="button"></button>
+    <pre class="code-section"><code id="lurkcode" name="lurkcode" contenteditable="true" class="lisp">(let ((x (commit 123))) (open 0x2e7838216c5a9272803a2f49c3a5529f2e6bb68942d54204ce03c09727782da6))</code></pre>
+    <span id="output-container">
+      <pre class="output-section"><code class="output" id="output" name="output">output goes here</code></pre>
+    </span>
+  </div>
+  
+  {{ .Page.Scratch.Set "lurk" true }}
+{{ end }}

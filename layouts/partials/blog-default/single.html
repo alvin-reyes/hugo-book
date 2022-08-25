@@ -1,5 +1,4 @@
-{{ define "main" }}
-  <section class="section pages-single pages-single-color {{ if .Site.Params.dark }}dark{{ end }}">
+  <section class="section pages-single">
     <div class="container">
       <div class="flex justify-end">
         {{ partial "docs/search" . }}
@@ -26,22 +25,9 @@
         <div class="page-meta">
           {{ .Date.Format "2006-01-02" }} {{ with .Params.Author }} / {{ . }} {{ end }}
         </div>
-        <div class="page-title-author">
-          <h2 class="page-title">
-            {{ .Title }}
-          </h2>
-          <div class="page-author">
-            {{ if .Params.authorImage }}
-              <img src="{{ .Params.authorImage }}" alt="{{ .Params.author }}">
-            {{ end }}
-            <p class="author-name"> {{ .Params.author }} </p>
-          </div>
-        </div>
-        {{ with .Params.image }}
-          <div class="page-hero">
-            <img src="{{ . }}" alt="Featured Image">
-          </div>
-        {{ end }}
+        <h2 class="page-title">
+          {{ partial "docs/title.html" . }}
+        </h2>
         {{ with .Params.description }}
           <div class="page-description">
             {{ . | markdownify }}
@@ -54,8 +40,7 @@
     </div>
   </section>
 
-  {{ partial "related-color" . }}
-{{ end }}
+  {{ partial "related" . }}
 
 {{ define "toc" }}
   {{ partial "docs/toc" . }}
