@@ -1,7 +1,7 @@
 {{ define "main" }}
   {{ if .Site.Params.themeColor }}
-    {{ partial "blog-color/single" . }}
+    {{ partial "blog-color/list" . }}
   {{ else }}
-    {{ partial "blog-default/single" . }}
+    {{ partial "blog-default/list" . }}
   {{ end }}
 {{ end }}
