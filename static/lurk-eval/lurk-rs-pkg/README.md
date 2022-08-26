@@ -1,12 +1,10 @@
 # Lurk
 
-[![Build Status][build-image]][build-link]
+[![CircleCI](https://circleci.com/gh/lurk-lang/lurk-rs.svg?style=shield)](https://circleci.com/gh/lurk-lang/lurk-rs)
 ![minimum rustc 1.60][msrv-image]
 ![crates.io][crates-image]
 
-[build-image]: https://github.com/lurk-lang/lurk-rs/workflows/CI/badge.svg
-[build-link]: https://github.com/lurk-lang/lurk-rs/actions?query=workflow%3ACI+branch%3Amaster
-[msrv-image]: https://img.shields.io/badge/rustc-1.56+-blue.svg
+[msrv-image]: https://img.shields.io/badge/rustc-1.60+-blue.svg
 [crates-image]: https://img.shields.io/crates/v/lurk.svg
 
 # Disclaimer
@@ -51,30 +49,47 @@ Lurk backend integration is still immature, so current performance is not repres
 Lurk source files used in tests are in the [lurk-lib](https://github.com/lurk-lang/lurk-lib) submodule. You must
 initialize and update submodules before test will pass.
 
-## Wasm
+## Wasm Web Example
 
-Compile to `wasm32-unknown-unknown`
+### Install prerequisites
 
-### With cargo
+- wasm32 target:
 ```
-CC=emcc AR=emar cargo build --no-default-features --target wasm32-unknown-unknown --features wasm
+rustup target add wasm32-unknown-unknown
 ```
-### With nix
+- wasm-pack:
 ```
-# -L prints build output
-nix build .#lurk-wasm -L
+cargo install wasm-pack
 ```
-### With wasm-pack
+- wasm-ld linker:
 ```
-CC=emcc AR=emar wasm-pack build --no-default-features --features wasm
+# Ubuntu
+sudo apt install llvm lld-14
+# Mac
+brew install llvm
+# Add llvm to homebrew's PATH variable, e.g. one of the following
+export PATH=/usr/local/opt/llvm/bin:$PATH
+export PATH=/opt/homebrew/Cellar/llvm/13.0.1_1/bin:$PATH
+# Verify installation
+llc --version
 ```
-
-The steps above will generate a `pkg` folder with the javascript wasm artifacts (Lurk wasm bindings). Once this is available, we can launch the web example.
-
-Before launching the web example, we need to install the necessary pre-requisites.
-
+- [clang](https://clang.llvm.org/get_started.html)
 - [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) or [npm](https://nodejs.org/en/download/package-manager/)
 - [webpack](https://webpack.js.org/guides/installation/)
+
+### Build with wasm-pack
+
+* Linux
+```
+wasm-pack build --no-default-features --features wasm
+```
+* Mac
+```
+CC=clang AR=llvm-ar wasm-pack build --no-default-features --features wasm
+```
+### Build web evaluator
+
+Building with `wasm-pack` will generate a `pkg` folder with the javascript wasm artifacts (Lurk wasm bindings). Once this is available, we can launch the web example.
 
 Assuming we have `yarn` or `npm` installed, install `webpack` using the following command:
 
@@ -172,43 +187,23 @@ INFO  lurk::eval > Frame: 9
 
 ## Nix
 
-[Nix](https://nixos.org) provides a declarative, content addressed and deterministic build system.
-
-### Loading the build environment with all dependencies
-
+You can enter into a [Nix](https://nixos.org) shell with the appropriate
+dependencies for Lurk with
 ```
-nix develop
-# Or automatically with direnv
-direnv allow
+$ nix-shell
 ```
 
-### Build the crate
-```
-nix build .
-```
-
-### Run the example 
+And then building with Cargo as usual:
 
 ```
-nix run .#lurk-example
+$ cargo build
 ```
 
 ## Troubleshooting
-### `Failed to find tool. Is `emcc` installed?`
 
-Make sure that emcc is installed. Follow the steps below
-```
-git clone https://github.com/emscripten-core/emsdk.git
-cd emsdk
-./emsdk install latest
-./emsdk activate latest
-```
+- Wasm build: `Error: failed to build archive: section too large`
+Run `cargo clean`, then try compiling with `CC=clang AR=llvm-ar`
 
-You will be prompted by the cli to include the EMS specific environment variables. You can do so manually by running the following commands:
-```
-source "./emsdk/emsdk_env.sh"    
-echo 'source "./emsdk/emsdk_env.sh"' >> $HOME/.zprofile
-```
 ## License
 
 MIT or Apache 2.0

@@ -11,14 +11,14 @@
     "url": "https://github.com/lurk-lang/lurk-rs"
   },
   "files": [
-    "index_bg.wasm",
-    "index.js",
-    "index_bg.js",
-    "index.d.ts",
+    "lurk_bg.wasm",
+    "lurk.js",
+    "lurk_bg.js",
+    "lurk.d.ts",
     "LICENSE-APACHE",
     "LICENSE-MIT"
   ],
-  "module": "index.js",
-  "types": "index.d.ts",
+  "module": "lurk.js",
+  "types": "lurk.d.ts",
   "sideEffects": false
 }
