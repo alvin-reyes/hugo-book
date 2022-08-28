@@ -20,13 +20,23 @@ eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__
 
 /***/ }),
 
+/***/ "./eval.js":
+/*!*****************!*\
+  !*** ./eval.js ***!
+  \*****************/
+/***/ ((__webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"runLurkEvaluator\": () => (/* binding */ runLurkEvaluator)\n/* harmony export */ });\n/* harmony import */ var lurk_rs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lurk-rs */ \"./lurk-rs-pkg/lurk_bg.js\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([lurk_rs__WEBPACK_IMPORTED_MODULE_0__]);\nlurk_rs__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];\n\n\nfunction runLurkEvaluator(lurkExpression) {\n    const out = lurk_rs__WEBPACK_IMPORTED_MODULE_0__.run_lurk(lurkExpression);\n    return out;\n}\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });\n\n//# sourceURL=webpack://lurk-rs/./eval.js?");
+
+/***/ }),
+
 /***/ "./index.js":
 /*!******************!*\
   !*** ./index.js ***!
   \******************/
 /***/ ((__webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lurk_rs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lurk-rs */ \"./lurk-rs-pkg/lurk_bg.js\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([lurk_rs__WEBPACK_IMPORTED_MODULE_0__]);\nlurk_rs__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];\n\nvar output = document.getElementById(\"output\");\nvar status = document.getElementById(\"status\");\n\nfunction show(text) {\n    output.innerText = text;\n    console.log(text);\n}\n\nfunction log(text) {\n    output.append(\"\\n\\n\");\n    output.append(text);\n    console.log(text);\n}\n\n\nfunction setStatus(iterations) {\n  const text = \"iterations: \" + iterations;\n  status.innerText = text;\n}\n\nvar runit = document.getElementById(\"run\");\nvar input = document.getElementById(\"input\");\nrunit.onclick = function (_e) {\n    var source = input.value;\n    console.log(\"running: \" + source);\n\n    const out = lurk_rs__WEBPACK_IMPORTED_MODULE_0__.run_lurk(source);\n    const obj = JSON.parse(out);\n    setStatus(obj.iterations);\n    show(obj.result);\n\n};\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });\n\n//# sourceURL=webpack://lurk-rs/./index.js?");
+eval("__webpack_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _eval_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./eval.js */ \"./eval.js\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_eval_js__WEBPACK_IMPORTED_MODULE_0__]);\n_eval_js__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];\n\n\n\nvar output = document.getElementById(\"output\");\nvar status = document.getElementById(\"status\");\n\nfunction show(text) {\n    output.innerText = text;\n    console.log(text);\n}\n\nfunction log(text) {\n    output.append(\"\\n\\n\");\n    output.append(text);\n    console.log(text);\n}\n\n\nfunction setStatus(iterations) {\n  const text = \"iterations: \" + iterations;\n  status.innerText = text;\n}\n\nvar runit = document.getElementById(\"run\");\nvar input = document.getElementById(\"input\");\nrunit.onclick = function (_e) {\n    var source = input.value;\n    console.log(\"running: \" + source);\n\n    const out = (0,_eval_js__WEBPACK_IMPORTED_MODULE_0__.runLurkEvaluator)(source);\n    const obj = JSON.parse(out);\n    setStatus(obj.iterations);\n    show(obj.result);\n\n};\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });\n\n//# sourceURL=webpack://lurk-rs/./index.js?");
 
 /***/ }),
 
@@ -234,7 +244,8 @@ eval("var __webpack_instantiate__ = ([WEBPACK_IMPORTED_MODULE_0]) => {\n\treturn
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./index.js");
+/******/ 	__webpack_require__("./index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./eval.js");
 /******/ 	
 /******/ })()
 ;
