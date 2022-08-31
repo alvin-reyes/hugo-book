@@ -32,14 +32,14 @@ function wrapExports({ Repl }) {
 async function initHandlers() {
   let [singleThread, multiThread] = await Promise.all([
     (async () => {
-      const singleThread = await __webpack_require__.e(/*! import() */ "pkg_index_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ../pkg/index.js */ "./pkg/index.js", 23));
+      const singleThread = await Promise.all(/*! import() */[__webpack_require__.e("pkg_index_js"), __webpack_require__.e("pkg_snippets_wasm-bindgen-rayon-7afa899f36665473_src_workerHelpers_js-_97af0")]).then(__webpack_require__.bind(__webpack_require__, /*! ../pkg/index.js */ "./pkg/index.js"));
       await singleThread.default();
       return wrapExports(singleThread);
     })(),
     (async () => {
       // If threads are unsupported in this browser, skip this handler.
       if (!(await (0,wasm_feature_detect__WEBPACK_IMPORTED_MODULE_0__.threads)())) return;
-      const multiThread = await __webpack_require__.e(/*! import() */ "pkg_index_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ../pkg/index.js */ "./pkg/index.js", 23));
+      const multiThread = await Promise.all(/*! import() */[__webpack_require__.e("pkg_index_js"), __webpack_require__.e("pkg_snippets_wasm-bindgen-rayon-7afa899f36665473_src_workerHelpers_js-_97af0")]).then(__webpack_require__.bind(__webpack_require__, /*! ../pkg/index.js */ "./pkg/index.js"));
       await multiThread.default();
       await multiThread.initThreadPool(navigator.hardwareConcurrency);
       return wrapExports(multiThread);
@@ -130,36 +130,6 @@ comlink__WEBPACK_IMPORTED_MODULE_1__.expose({
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/create fake namespace object */
-/******/ 	(() => {
-/******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
-/******/ 		var leafPrototypes;
-/******/ 		// create a fake namespace object
-/******/ 		// mode & 1: value is a module id, require it
-/******/ 		// mode & 2: merge all properties of value into the ns
-/******/ 		// mode & 4: return value when already ns object
-/******/ 		// mode & 16: return value when it's Promise-like
-/******/ 		// mode & 8|1: behave like require
-/******/ 		__webpack_require__.t = function(value, mode) {
-/******/ 			if(mode & 1) value = this(value);
-/******/ 			if(mode & 8) return value;
-/******/ 			if(typeof value === 'object' && value) {
-/******/ 				if((mode & 4) && value.__esModule) return value;
-/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
-/******/ 			}
-/******/ 			var ns = Object.create(null);
-/******/ 			__webpack_require__.r(ns);
-/******/ 			var def = {};
-/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
-/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
-/******/ 				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => (value[key])));
-/******/ 			}
-/******/ 			def['default'] = () => (value);
-/******/ 			__webpack_require__.d(ns, def);
-/******/ 			return ns;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -194,18 +164,6 @@ comlink__WEBPACK_IMPORTED_MODULE_1__.expose({
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -224,27 +182,12 @@ comlink__WEBPACK_IMPORTED_MODULE_1__.expose({
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 		__webpack_require__.p = "";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/importScripts chunk loading */
 /******/ 	(() => {
-/******/ 		// no baseURI
+/******/ 		__webpack_require__.b = self.location + "";
 /******/ 		
 /******/ 		// object to store loaded chunks
 /******/ 		// "1" means "already loaded"
