@@ -1,26 +1,23 @@
 {{ if not (.Page.Scratch.Get "lurk") }}
 
-  <link rel="stylesheet" href="{{ "lurk/css/lurk.css"  }}" type="text/css" media="all">
-  <link rel="stylesheet" href="{{ "lurk/highlight-lisp/themes/github.css"  | relURL }}" type="text/css" media="all">
-
-  <script type="text/javascript" src="{{ "lurk/highlight-lisp/highlight-lisp.js" | relURL }}"></script>
-  <script type="module" src="{{ "lurk/js_wasm-worker_js.js" | relURL }}"></script>
-  <script type="module" src="{{ "lurk/index.js" | relURL }}"></script>
+<script type="text/javascript" src="{{ "lurk/highlight-lisp/highlight-lisp.js" | relURL }}"></script>
+<link rel="stylesheet" id="hl-theme" href="{{ "lurk/highlight-lisp/themes/github.css"  | relURL }}" >
+<link rel="stylesheet" href="{{ "lurk/css/lurk.css" | relURL  }}">
+<script type="module" src="{{ "lurk/index.js" | relURL }}"></script>
 
 
+<div id="main" width="100%" >
   <div class="lurk-code-component">
     <button id="reset" class="button"></button>
     <button id="run" class="button"></button>
-    <pre class="code-section"><code id="lurkcode" name="lurkcode" contenteditable="true" class="lisp">
-      {{ .Inner | .Page.RenderString }}
-    </code>
+    <pre class="code-section">
+      <code id="lurkcode" name="lurkcode" contenteditable="true" class="lisp">{{ .Inner | .Page.RenderString }}</code>
     </pre>
-
     <span id="output-container">
         <pre class="output-section"><code class="output" id="output" name="output">output goes here</code></pre>
-
     </span>
   </div>
+</div>
 
-  {{ .Page.Scratch.Set "lurk" true }}
+{{ .Page.Scratch.Set "lurk" true }}
 {{ end }}

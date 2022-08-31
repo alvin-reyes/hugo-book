@@ -10,6 +10,11 @@
 <script type="module" src="{{ "lurk/index.js" | relURL }}"></script>
 <script src="{{ "lurk-eval/index.js"  | relURL  }}"></script>
 
+<script>
+
+
+</script>
+
 <style>
   .terminal {
     width: 100%;
@@ -39,12 +44,16 @@
 </style>
 
 <script type="text/javascript">
+
   function reset() {
+
     var original = {{ .Inner | .Page.RenderString }}
     var input = document.getElementById("input");
     var output = document.getElementById("output");
     input.value = original;
-    //output.value = '';
+    const a = runLurkEvaluator("asasasas");
+    console.log(a);
+
   }
   function copy() {
     /* Get the text field */
