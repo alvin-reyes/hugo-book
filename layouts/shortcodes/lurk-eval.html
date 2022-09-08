@@ -82,6 +82,7 @@
     var input = document.getElementById("input{{$id}}");
     var output = document.getElementById("output{{$id}}");
     input.value = original;
+    output.value = "";
   });
 
   document.getElementById("run{{$id}}").addEventListener("click", async function() {
@@ -92,6 +93,6 @@
     jsonResult = JSON.parse(result);
     output.value = jsonResult.result;
 
-    lurkEval.saveLurkExpressionOutput("{{$storeAt}}",jsonResult.result);
+    //lurkEval.saveLurkExpressionOutput("{{$storeAt}}",jsonResult.result);
   });
 </script>

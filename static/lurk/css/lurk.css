@@ -18,11 +18,15 @@
   display: none;
 }
 
+#lurk-code-component-controls {
+  display: none;
+}
+
 #run {
   background-repeat: no-repeat;
   background-color: rgb(104, 104, 104);
-  -webkit-mask-image: url(../img/play-fill.svg);
-  mask-image: url(../img/play-fill.svg);
+  /*-webkit-mask-image: url(../img/play-fill.svg);*/
+  /*mask-image: url(../img/play-fill.svg);*/
   height: 16px;
   width: 16px;
   border: 0;
@@ -43,8 +47,8 @@
 #reset {
   background-repeat: no-repeat;
   background-color: rgb(104, 104, 104);
-  -webkit-mask-image: url(../img/rewind-fill.svg);
-  mask-image: url(../img/rewind-fill.svg);
+  /*-webkit-mask-image: url(../img/rewind-fill.svg);*/
+  /*mask-image: url(../img/rewind-fill.svg);*/
   height: 16px;
   width: 16px;
   border: 0;

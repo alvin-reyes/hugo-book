@@ -482,7 +482,7 @@ function onPanic(message) {
   \***************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "895a9a1e0bddda289d78.wasm";
+module.exports = __webpack_require__.p + "6fe0f250bcae7b78be97.wasm";
 
 /***/ })
 
