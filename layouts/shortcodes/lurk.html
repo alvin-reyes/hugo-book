@@ -78,11 +78,46 @@
                  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
                }
 
+  .spinner{{$id}} {
+    background-repeat: no-repeat;
+    background-color: rgb(104, 104, 104);
+    height: 16px;
+    width: 16px;
+    border: 0;
+    box-sizing: border-box;
+    transition: 100ms all ease;
+    cursor: pointer;
+    position: absolute;
+    top: 7px;
+    right: 6px;
+    -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+    animation: sk-rotateplane 1.2s infinite ease-in-out;
+  }
+
+  @-webkit-keyframes sk-rotateplane {
+    0% { -webkit-transform: perspective(120px) }
+    50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+    100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+  }
+
+  @keyframes sk-rotateplane {
+    0% {
+      transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+      -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+    } 50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+      } 100% {
+          transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+          -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        }
+  }
 </style>
 
 <div id="main" width="100%" style="margin:10px;" >
   <div class="lurk-code-component">
     <div id="lurk-code-component-controls{{$id}}">
+      <button class="spinner{{$id}}" id="spinner{{$id}}"></button>
       <button id="reset{{$id}}" class="button"></button>
       <button id="run{{$id}}" class="button"></button>
     </div>
@@ -98,6 +133,24 @@
 <script type="text/javascript">
 
   var originalContent = {{ .Inner | .Page.RenderString }};
+
+  document.getElementById("reset{{$id}}").style.display = "none";
+  document.getElementById("run{{$id}}").style.display = "none";
+  document.getElementById("spinner{{$id}}").style.display = "block";
+
+  function checkRunEvaluatorHandler() {
+    if (window.runExpressionEvaluator != undefined) {
+      document.getElementById("reset{{$id}}").style.display = "block";
+      document.getElementById("run{{$id}}").style.display = "block";
+      document.getElementById("spinner{{$id}}").style.display = "none";
+    }
+  }
+  function setImmediateInterval(funcToRun, ms) {
+    funcToRun();
+    return setInterval(funcToRun, ms);
+  }
+  setImmediateInterval(checkRunEvaluatorHandler, 1000);
+
   document.getElementById("run{{$id}}").onclick = async function() {
     try{
       var lurkcode = document.getElementById("lurkcode{{$id}}");
