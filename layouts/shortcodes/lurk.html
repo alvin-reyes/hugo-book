@@ -2,6 +2,7 @@
 <script type="text/javascript" src="{{ "lurk/highlight-lisp/highlight-lisp.js" | relURL }}"></script>
 <link rel="stylesheet" id="hl-theme" href="{{ "lurk/highlight-lisp/themes/github.css"  | relURL }}" >
 <link rel="stylesheet" href="{{ "lurk/css/lurk.css" | relURL  }}">
+
 <script type="module" src="{{ "lurk/index.js" | relURL }}"></script>
 {{ .Page.Scratch.Set "lurk" true }}
 {{ end }}
@@ -14,7 +15,7 @@
   }
 
   .lurk-code-component .code-section {
-    padding-top: 20px;
+    padding: 20px;
   }
 
   .lurk-code-component {
@@ -79,13 +80,14 @@
 
 </style>
 
-<div id="main" width="100%" >
+<div id="main" width="100%" style="margin:10px;" >
   <div class="lurk-code-component">
     <div id="lurk-code-component-controls{{$id}}">
       <button id="reset{{$id}}" class="button"></button>
       <button id="run{{$id}}" class="button"></button>
     </div>
-    <pre class="code-section"><code id="lurkcode{{$id}}" name="lurkcode" contenteditable="{{$editable}}" class="lisp">{{ .Inner | .Page.RenderString }}</code></pre>
+    <pre class="code-section"><code id="lurkcode{{$id}}" name="lurkcode" contenteditable="{{$editable}}"
+                                    class="lisp hl-highlighted hl-highlighted hl-highlighted hl-highlighted hl-highlighted">{{ .Inner | .Page.RenderString }}</code></pre>
     <span id="output-container{{$id}}">
         <pre class="output-section"><code class="output" id="output{{$id}}" name="output">output goes here</code></pre>
       </span>
@@ -95,19 +97,19 @@
 
 <script type="text/javascript">
 
-  var originalContent;
+  var originalContent = {{ .Inner | .Page.RenderString }};
   document.getElementById("run{{$id}}").onclick = async function() {
     try{
-
       var lurkcode = document.getElementById("lurkcode{{$id}}");
       var output = document.getElementById("output{{$id}}");
       var output_container = document.getElementById("output-container{{$id}}");
+      output_container.style.display = "block";
+      output.textContent = "Processing....";
       let textContent = lurkcode.textContent;
-      originalContent = textContent;
       ab = await window.runExpressionEvaluator({textContent});
       var outObj = JSON.parse(ab);
       output.textContent = "Iterations: " + outObj.iterations + "\nResult: " + outObj.result;
-      output_container.style.display = "block";
+
 
     } catch (e) {
       //  console.log(e);
