@@ -94,6 +94,26 @@
     animation: sk-rotateplane 1.2s infinite ease-in-out;
   }
 
+  .dots{{$id}} {
+    width: 56px;
+    height: 10px;
+    background: radial-gradient(circle closest-side,rgb(153, 153, 153), 90%,#0000) 0 0/33% 100% space;
+    clip-path: inset(0 100% 0 0);
+    animation: dots-e3xtdg 1.5s steps(4) infinite;
+    box-sizing: border-box;
+    transition: 100ms all ease;
+    cursor: pointer;
+    position: absolute;
+    top: 7px;
+    right: 6px;
+  }
+
+  @keyframes dots-e3xtdg {
+    to {
+      clip-path: inset(0 -34% 0 0);
+    }
+  }
+
   @-webkit-keyframes sk-rotateplane {
     0% { -webkit-transform: perspective(120px) }
     50% { -webkit-transform: perspective(120px) rotateY(180deg) }
@@ -116,8 +136,8 @@
 
 <div id="main" width="100%" style="margin:10px;" >
   <div class="lurk-code-component">
+    <div class="dots{{$id}}" id="dots{{$id}}"></div>
     <div id="lurk-code-component-controls{{$id}}">
-      <button class="spinner{{$id}}" id="spinner{{$id}}"></button>
       <button id="reset{{$id}}" class="button"></button>
       <button id="run{{$id}}" class="button"></button>
     </div>
@@ -136,13 +156,17 @@
 
   document.getElementById("reset{{$id}}").style.display = "none";
   document.getElementById("run{{$id}}").style.display = "none";
-  document.getElementById("spinner{{$id}}").style.display = "block";
+  document.getElementById("dots{{$id}}").style.display = "block";
+
+  lurkCode = document.getElementById("lurkcode{{$id}}")
+  HighlightLisp.highlight_element(lurkCode);
+  HighlightLisp.paren_match(lurkCode);
 
   function checkRunEvaluatorHandler() {
     if (window.runExpressionEvaluator != undefined) {
       document.getElementById("reset{{$id}}").style.display = "block";
       document.getElementById("run{{$id}}").style.display = "block";
-      document.getElementById("spinner{{$id}}").style.display = "none";
+      document.getElementById("dots{{$id}}").style.display = "none";
     }
   }
   function setImmediateInterval(funcToRun, ms) {
@@ -171,6 +195,7 @@
 
   document.getElementById("reset{{$id}}").onclick = async function() {
     try {
+      sp
       var lurkcode = document.getElementById("lurkcode{{$id}}");
       lurkcode.textContent = originalContent;
     } catch (e) {
