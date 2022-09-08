@@ -146,16 +146,21 @@
         <pre class="output-section"><code class="output" id="output{{$id}}" name="output">output goes here</code></pre>
       </span>
   </div>
+  <div id="counter{{$id}}" style="display:none;">0</div>
 </div>
 
 
 <script type="text/javascript">
+  var counter = document.getElementById("counter{{$id}}");
   localStorage.setItem("originalContent_{{$id}}", {{ .Inner | .Page.RenderString }});
+  localStorage.setItem("originalContent_{{$id}}_"+counter, {{ .Inner | .Page.RenderString }});
 
+  //  reset, runs and spinner.
   document.getElementById("reset{{$id}}").style.display = "none";
   document.getElementById("run{{$id}}").style.display = "none";
   document.getElementById("dots{{$id}}").style.display = "block";
 
+  // lurkCode
   lurkCode = document.getElementById("lurkcode{{$id}}")
   HighlightLisp.highlight_element(lurkCode);
   HighlightLisp.paren_match(lurkCode);
@@ -175,18 +180,23 @@
 
   document.getElementById("run{{$id}}").onclick = async function() {
     try{
-
       var lurkcode = document.getElementById("lurkcode{{$id}}");
+      var counter = document.getElementById("counter{{$id}}").innerHTML;
+      var counterInt = parseInt(counter) + 1;
+
+      document.getElementById("counter{{$id}}").innerHTML = counterInt;
+      localStorage.setItem("originalContent_{{$id}}_" + counterInt, lurkcode.textContent);
+
       var output = document.getElementById("output{{$id}}");
       var output_container = document.getElementById("output-container{{$id}}");
+
       output_container.style.display = "block";
       output.textContent = "Processing....";
       let textContent = lurkcode.textContent;
       ab = await window.runExpressionEvaluator({textContent});
       var outObj = JSON.parse(ab);
       output.textContent = "Iterations: " + outObj.iterations + "\nResult: " + outObj.result;
-
-
+      localStorage.setItem("originalContent_output_{{$id}}_" + counterInt, output.textContent);
     } catch (e) {
       console.log(e);
     }
@@ -195,7 +205,23 @@
   document.getElementById("reset{{$id}}").onclick = async function() {
     try {
       var lurkcode = document.getElementById("lurkcode{{$id}}");
-      lurkcode.textContent = localStorage.getItem("originalContent_{{$id}}");
+      var counter = document.getElementById("counter{{$id}}").innerHTML;
+
+      if (counter == 1) {
+        var output_container = document.getElementById("output-container{{$id}}");
+        output_container.style.display = "none";
+        return
+      }
+
+      lurkcode.textContent = localStorage.getItem("originalContent_{{$id}}_"+counter);
+      var counterInt = parseInt(counter) - 1;
+      document.getElementById("counter{{$id}}").innerHTML = counterInt;
+
+      var output = document.getElementById("output{{$id}}");
+      outputContent = localStorage.getItem("originalContent_output_{{$id}}_" + counterInt);
+      output.textContent = outputContent;
+
+
       HighlightLisp.highlight_element(lurkcode);
       HighlightLisp.paren_match(lurkcode);
     } catch (e) {
