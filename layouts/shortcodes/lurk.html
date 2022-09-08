@@ -141,8 +141,7 @@
       <button id="reset{{$id}}" class="button"></button>
       <button id="run{{$id}}" class="button"></button>
     </div>
-    <pre class="code-section"><code id="lurkcode{{$id}}" name="lurkcode" contenteditable="{{$editable}}"
-                                    class="lisp hl-highlighted hl-highlighted hl-highlighted hl-highlighted hl-highlighted">{{ .Inner | .Page.RenderString }}</code></pre>
+    <pre class="code-section"><code id="lurkcode{{$id}}" name="lurkcode" contenteditable="{{$editable}}">{{ .Inner | .Page.RenderString }}</code></pre>
     <span id="output-container{{$id}}">
         <pre class="output-section"><code class="output" id="output{{$id}}" name="output">output goes here</code></pre>
       </span>
@@ -151,7 +150,7 @@
 
 
 <script type="text/javascript">
-  var originalContent = {{ .Inner | .Page.RenderString }};
+  localStorage.setItem("originalContent_{{$id}}", {{ .Inner | .Page.RenderString }});
 
   document.getElementById("reset{{$id}}").style.display = "none";
   document.getElementById("run{{$id}}").style.display = "none";
@@ -196,10 +195,9 @@
   document.getElementById("reset{{$id}}").onclick = async function() {
     try {
       var lurkcode = document.getElementById("lurkcode{{$id}}");
-
-      lurkcode.textContent = originalContent;
-      HighlightLisp.highlight_element(lurkCode);
-      HighlightLisp.paren_match(lurkCode);
+      lurkcode.textContent = localStorage.getItem("originalContent_{{$id}}");
+      HighlightLisp.highlight_element(lurkcode);
+      HighlightLisp.paren_match(lurkcode);
     } catch (e) {
       console.log(e);
     }
