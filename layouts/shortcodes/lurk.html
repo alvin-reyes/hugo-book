@@ -8,7 +8,7 @@
 {{ end }}
 
 {{ $id := now.UnixNano }}
-{{ $editable := .Get "editable" }}
+{{ $editable := .Get "editable" | default "false" }}
 <style>
   [contenteditable] {
     outline: 0px solid transparent;
@@ -176,6 +176,7 @@
 
   document.getElementById("run{{$id}}").onclick = async function() {
     try{
+
       var lurkcode = document.getElementById("lurkcode{{$id}}");
       var output = document.getElementById("output{{$id}}");
       var output_container = document.getElementById("output-container{{$id}}");
@@ -195,7 +196,10 @@
   document.getElementById("reset{{$id}}").onclick = async function() {
     try {
       var lurkcode = document.getElementById("lurkcode{{$id}}");
+
       lurkcode.textContent = originalContent;
+      HighlightLisp.highlight_element(lurkCode);
+      HighlightLisp.paren_match(lurkCode);
     } catch (e) {
       console.log(e);
     }
