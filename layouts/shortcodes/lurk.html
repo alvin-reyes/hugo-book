@@ -151,9 +151,9 @@
 
 
 <script type="text/javascript">
-  var counter = document.getElementById("counter{{$id}}");
-  localStorage.setItem("originalContent_{{$id}}", {{ .Inner | .Page.RenderString }});
-  localStorage.setItem("originalContent_{{$id}}_"+counter, {{ .Inner | .Page.RenderString }});
+  var counter = document.getElementById("counter{{$id}}").innerHTML;
+  // localStorage.setItem("originalContent_{{$id}}", {{ .Inner | .Page.RenderString }});
+  // localStorage.setItem("originalContent_{{$id}}_"+counter, {{ .Inner | .Page.RenderString }});
 
   //  reset, runs and spinner.
   document.getElementById("reset{{$id}}").style.display = "none";
@@ -180,19 +180,19 @@
 
   document.getElementById("run{{$id}}").onclick = async function() {
     try{
-      var lurkcode = document.getElementById("lurkcode{{$id}}");
+      var lurkCode = document.getElementById("lurkcode{{$id}}");
       var counter = document.getElementById("counter{{$id}}").innerHTML;
       var counterInt = parseInt(counter) + 1;
 
       document.getElementById("counter{{$id}}").innerHTML = counterInt;
-      localStorage.setItem("originalContent_{{$id}}_" + counterInt, lurkcode.textContent);
+      localStorage.setItem("originalContent_{{$id}}_" + counterInt, lurkCode.textContent);
 
       var output = document.getElementById("output{{$id}}");
       var output_container = document.getElementById("output-container{{$id}}");
 
       output_container.style.display = "block";
       output.textContent = "Processing....";
-      let textContent = lurkcode.textContent;
+      let textContent = lurkCode.textContent;
       ab = await window.runExpressionEvaluator({textContent});
       var outObj = JSON.parse(ab);
       output.textContent = "Iterations: " + outObj.iterations + "\nResult: " + outObj.result;
@@ -204,26 +204,26 @@
 
   document.getElementById("reset{{$id}}").onclick = async function() {
     try {
-      var lurkcode = document.getElementById("lurkcode{{$id}}");
+      var lurkCode = document.getElementById("lurkcode{{$id}}");
       var counter = document.getElementById("counter{{$id}}").innerHTML;
-
-      if (counter == 1) {
+      var counterInt = parseInt(counter) - 1;
+      console.log(counterInt);
+      if (counterInt == 0) {
         var output_container = document.getElementById("output-container{{$id}}");
         output_container.style.display = "none";
         return
       }
 
-      lurkcode.textContent = localStorage.getItem("originalContent_{{$id}}_"+counter);
-      var counterInt = parseInt(counter) - 1;
+
+      lurkCode.textContent = localStorage.getItem("originalContent_{{$id}}_"+counterInt);
       document.getElementById("counter{{$id}}").innerHTML = counterInt;
 
       var output = document.getElementById("output{{$id}}");
-      outputContent = localStorage.getItem("originalContent_output_{{$id}}_" + counterInt);
-      output.textContent = outputContent;
+      output.textContent = localStorage.getItem("originalContent_output_{{$id}}_" + counterInt);
 
 
-      HighlightLisp.highlight_element(lurkcode);
-      HighlightLisp.paren_match(lurkcode);
+      HighlightLisp.highlight_element(lurkCode);
+      HighlightLisp.paren_match(lurkCode);
     } catch (e) {
       console.log(e);
     }
