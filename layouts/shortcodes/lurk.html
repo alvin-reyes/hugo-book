@@ -151,7 +151,6 @@
 
 
 <script type="text/javascript">
-
   var originalContent = {{ .Inner | .Page.RenderString }};
 
   document.getElementById("reset{{$id}}").style.display = "none";
@@ -195,7 +194,6 @@
 
   document.getElementById("reset{{$id}}").onclick = async function() {
     try {
-      sp
       var lurkcode = document.getElementById("lurkcode{{$id}}");
       lurkcode.textContent = originalContent;
     } catch (e) {
