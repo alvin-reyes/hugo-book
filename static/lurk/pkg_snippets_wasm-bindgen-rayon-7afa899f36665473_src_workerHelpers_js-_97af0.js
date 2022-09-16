@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkrust_webpack_template"] = self["webpackChunkrust_webpack_template"] || []).push([["pkg_snippets_wasm-bindgen-rayon-7afa899f36665473_src_workerHelpers_js-_97af0"],{
+(self["webpackChunkLurk_web_REPL"] = self["webpackChunkLurk_web_REPL"] || []).push([["pkg_snippets_wasm-bindgen-rayon-7afa899f36665473_src_workerHelpers_js-_97af0"],{
 
 /***/ "./pkg/snippets/wasm-bindgen-rayon-7afa899f36665473/src/workerHelpers.js":
 /*!*******************************************************************************!*\

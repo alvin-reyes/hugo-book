@@ -12,19 +12,18 @@
     <script type="module" src="index.js"></script>
 
     <div id="main" style="width: 800px;">
-    <!-- lurk component start -->
-    <div class="lurk-code-component">
-      <div id="lurk-code-component-controls">
-        <button id="reset" class="button"></button>
-        <button id="run" class="button"></button>
+      <!-- lurk component start -->
+      <div class="lurk-code-component">
+        <div id="lurk-code-component-controls">
+          <button id="reset" class="button"></button>
+          <button id="run" class="button"></button>
+        </div>
+        <pre class="code-section"><code id="lurkcode" name="lurkcode" contenteditable="true" class="lisp">(let ((foo (lambda (a b c)(* (+ a b) c))))(foo 1 2 3))</code></pre>
+        <span id="output-container">
+          <pre class="output-section"><code class="output" id="output" name="output">output goes here</code></pre>
+        </span>
       </div>
-      <pre class="code-section"><code id="lurkcode" name="lurkcode" contenteditable="true" class="lisp">(let ((foo (lambda (a b c)(* (+ a b) c))))(foo 1 2 3))</code></pre>
-      <span id="output-container">
-        <pre class="output-section"><code class="output" id="output" name="output">output goes here</code></pre>
-      </span>
+      <!-- lurk component end -->
     </div>
-    <!-- lurk component end -->
-  
-  </div>
   </body>
 </html>
