@@ -8,11 +8,20 @@
 {{ end }}
 
 {{ $id := now.UnixNano }}
+{{ $group := .Get "group" | default ""  }}
 {{ $editable := .Get "editable" | default "false" }}
 {{ $name := .Get "name" | default "name_default" }}
 {{ $resultOnly := .Get "resultOnly" | default "false" }}
 {{ $input := .Get "input" | default "name_default" }}
+{{ $storeOutputAt := .Get "storeOutputAt" | default "name_default" }}
+{{ $evaluateOutputFrom := .Get "evaluateOutputFrom" | default "name_default" }}
 {{ $content := .Inner | .Page.RenderString }}
+
+{{ $hashOnly := .Get "hashOnly" | default "false" }}
+
+
+{{ $args := .Get "args" | default "" }}
+{{ $args := split $args "," }}
 
 <style>
   [contenteditable] {
@@ -146,23 +155,41 @@
       <button id="reset{{$id}}" class="button"></button>
       <button id="run{{$id}}" class="button"></button>
     </div>
-    <pre class="code-section"><code id="lurkcode{{$id}}" name="lurkcode" contenteditable="{{$editable}}"></code></pre>
+    <pre class="code-section"><code id="lurkcode{{$id}}" name="lurkcode_{{$storeOutputAt}}" contenteditable="{{$editable}}"></code></pre>
     <span id="output-container{{$id}}">
-        <pre class="output-section"><code class="output" id="output{{$id}}" name="output">output goes here</code></pre>
+        <pre class="output-section"><code class="output" id="output{{$id}}" name="output_{{$storeOutputAt}}">output goes here</code></pre>
       </span>
   </div>
   <div id="counter{{$id}}" style="display:none;">0</div>
 </div>
 
+<!-- hidden stuff -->
+<textarea id="evaluate_from{{$id}}" name="evaluate_from{{$evaluateOutputFrom}}" style="display: none;">{{$evaluateOutputFrom}}</textarea>
+<textarea id="store_at{{$id}}" name="store_at{{$storeOutputAt}}" style="display: none;">{{$storeOutputAt}}</textarea>
+
 <script type="text/javascript">
+
+  document.getElementById("evaluate_from{{$id}}").addEventListener("change", function() {
+    document.getElementById("lurkcode{{$id}}").textContent = document.getElementsByName("evaluate_from{{$evaluateOutputFrom}}")[0].textContent;
+    var lurkCode = document.getElementById("lurkcode{{$id}}");
+    HighlightLisp.highlight_element(lurkCode);
+    HighlightLisp.paren_match(lurkCode);
+  },true);
 
   //  dom objects
   var counterObj = document.getElementById("counter{{$id}}");
+  var evaluateOutputFromObj = document.getElementById("evaluate_from{{$id}}");
+  var storeOutputAtObj = document.getElementById("store_at{{$id}}");
 
   //  data vars
   var counter = 0;
+  var evaluateOutputFrom = "";
+  var storeOutputAt = "";
+
   function load() {
     counter = counterObj.innerHTML;
+    evaluateOutputFrom = evaluateOutputFromObj.textContent;
+    storeOutputAt = storeOutputAtObj.textContent;
 
     //  reset, runs and spinner.
     document.getElementById("reset{{$id}}").style.display = "none";
@@ -171,10 +198,23 @@
 
     // lurkCode
     lurkCode = document.getElementById("lurkcode{{$id}}")
-    lurkCode.textContent = {{$content}};
+
+    //  set the code
+    if (evaluateOutputFrom == "name_default") {
+      lurkCode.textContent = {{$content}};
+    } else {
+      // check local store
+      //localStorage.getItem(evaluateOutputFrom) ? lurkCode.textContent = localStorage.getItem(evaluateOutputFrom) : lurkCode.textContent = {{$content}};
+      //lurkCode.textContent = document.getElementsByName("store_at{{$evaluateOutputFrom}}")[0].value;
+      //lurkCode.textContent = localStorage.getItem(document.getElementsByName("evaluate_from{{$evaluateOutputFrom}}")[0].value);
+    }
 
     HighlightLisp.highlight_element(lurkCode);
     HighlightLisp.paren_match(lurkCode);
+  }
+
+  function dataCheck() {
+    //lurkCode.textContent = document.getElementsByName("store_at{{$evaluateOutputFrom}}")[0].value;
   }
 
   function checkRunEvaluatorHandler() {
@@ -187,7 +227,6 @@
 
   document.getElementById("run{{$id}}").onclick = async function() {
     try{
-
       var lurkCode = document.getElementById("lurkcode{{$id}}");
       var counter = document.getElementById("counter{{$id}}").innerHTML;
       var counterInt = parseInt(counter) + 1;
@@ -207,17 +246,35 @@
 
       if ({{$resultOnly}} == "true") {
         output.textContent = outObj.result; // only get the result.
-      }else {
+      } else {
         output.textContent = "Iterations: " + outObj.iterations + "\nResult: " + outObj.result; // only get the iteration and result.
       }
 
+      if ({{$hashOnly}} == "true") {
+        output.textContent = outObj.result.toString().matchAll(""); // only get the hash.
+      }
+
       localStorage.setItem("originalContent_output_{{$id}}_" + counterInt, output.textContent); // store the result on a local storage
+
+      //  change the hidden div to the output.
+      document.getElementById("store_at{{$id}}").textContent = outObj.result;
+      localStorage.setItem("{{$storeOutputAt}}", outObj.result);
+      document.getElementById("evaluate_from{{$id}}").textContent = outObj.result;
+
+      //  evaluate
+      //console.log(document.getElementsByName("store_at{{$storeOutputAt}}")[0]);
+      document.getElementsByName("store_at{{$storeOutputAt}}")[0].textContent = outObj.result;
+      document.getElementsByName("evaluate_from{{$storeOutputAt}}")[0].textContent = document.getElementsByName("store_at{{$storeOutputAt}}")[0].textContent;
+      //document.getElementsByName("evaluate_from{{$storeOutputAt}}")[0].value = document.getElementsByName("store_at{{$storeOutputAt}}")[0].textContent;
+
+      const e = new Event("change");
+      const element = document.getElementsByName("evaluate_from{{$storeOutputAt}}")[0];
+      element.dispatchEvent(e);
 
     } catch (e) {
       console.log(e);
     }
   };
-
 
   //  onclick listener
   document.getElementById("reset{{$id}}").onclick = async function() {
@@ -251,7 +308,13 @@
     return setInterval(funcToRun, ms);
   }
 
+  //  get hash from open or comm
+  function getHashFromOutput(stringInverse) {
+
+  }
+
   setImmediateInterval(checkRunEvaluatorHandler, 1000);
+  setImmediateInterval(dataCheck,1000);
 
   load();
 
