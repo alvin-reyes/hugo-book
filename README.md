@@ -1,12 +1,12 @@
-# Hugo Book Theme
+# Hugo Book Theme for Lurk
 
 [![Hugo](https://img.shields.io/badge/hugo-0.68-blue.svg)](https://gohugo.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Build with Hugo](https://github.com/alex-shpak/hugo-book/workflows/Build%20with%20Hugo/badge.svg)
 
 ### [Hugo](https://gohugo.io) documentation theme as simple as plain book
 
-![Screenshot](https://github.com/alex-shpak/hugo-book/blob/master/images/screenshot.png)
+![image](https://user-images.githubusercontent.com/4479171/190435818-15b3da8e-850f-490c-838d-8d15214a7427.png)
+
 
 - [Features](#features)
 - [Requirements](#requirements)
