@@ -1,5 +1,6 @@
 {{ if not (.Page.Scratch.Get "lurk") }}
 <script type="text/javascript" src="{{ "lurk/highlight-lisp/highlight-lisp.js" | relURL }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" id="hl-theme" href="{{ "lurk/highlight-lisp/themes/github.css"  | relURL }}" >
 <link rel="stylesheet" href="{{ "lurk/css/lurk.css" | relURL  }}">
 <script type="module" src="{{ "lurk/index.js" | relURL }}"></script>
@@ -169,13 +170,6 @@
 
 <script type="text/javascript">
 
-  // document.getElementById("evaluate_from{{$id}}").addEventListener("change", function() {
-  //   document.getElementById("lurkcode{{$id}}").textContent = document.getElementsByName("evaluate_from{{$evaluateOutputFrom}}")[0].textContent;
-  //   var lurkCode = document.getElementById("lurkcode{{$id}}");
-  //   HighlightLisp.highlight_element(lurkCode);
-  //   HighlightLisp.paren_match(lurkCode);
-  // },true);
-
   //  dom objects
   var counterObj = document.getElementById("counter{{$id}}");
   var evaluateOutputFromObj = document.getElementById("evaluate_from{{$id}}");
@@ -186,6 +180,7 @@
   var evaluateOutputFrom = "";
   var storeOutputAt = "";
 
+  //  this runs every time the page/component is loaded.
   function load() {
     counter = counterObj.innerHTML;
     evaluateOutputFrom = evaluateOutputFromObj.textContent;
@@ -202,22 +197,24 @@
     //  set the code
     if (evaluateOutputFrom == "name_default") {
       lurkCode.textContent = {{$content}};
-    } else {
-      // check local store
-      //localStorage.getItem(evaluateOutputFrom) ? lurkCode.textContent = localStorage.getItem(evaluateOutputFrom) : lurkCode.textContent = {{$content}};
-      //lurkCode.textContent = document.getElementsByName("store_at{{$evaluateOutputFrom}}")[0].value;
-      //lurkCode.textContent = localStorage.getItem(document.getElementsByName("evaluate_from{{$evaluateOutputFrom}}")[0].value);
     }
 
     HighlightLisp.highlight_element(lurkCode);
     HighlightLisp.paren_match(lurkCode);
   }
 
-  function dataCheck() {
-    //lurkCode.textContent = document.getElementsByName("store_at{{$evaluateOutputFrom}}")[0].value;
-  }
-
+  //  this runs within the given interval.
   function checkRunEvaluatorHandler() {
+
+    //  we need to check if safari or not, safari doesn't like wasm WebAssembly.Memory() so we need to use a different method.
+    if (isSafari()) {
+      document.getElementById("reset{{$id}}").style.display = "block";
+      document.getElementById("run{{$id}}").style.display = "block";
+      document.getElementById("dots{{$id}}").style.display = "none";
+      return;
+    }
+
+    //  if none-safari browser, we just use wasm.
     if (window.runExpressionEvaluator != undefined) {
       document.getElementById("reset{{$id}}").style.display = "block";
       document.getElementById("run{{$id}}").style.display = "block";
@@ -225,6 +222,7 @@
     }
   }
 
+  //  this runs when the run button is clicked.
   document.getElementById("run{{$id}}").onclick = async function() {
     try{
 
@@ -249,8 +247,9 @@
       output_container.style.display = "block";
       output.textContent = "Processing...."; // just some simple feedback to the user
       let textContent = lurkCode.textContent;
-      evaluationResult = await window.runExpressionEvaluator({textContent});
-      var outObj = JSON.parse(evaluationResult); // parse to json
+
+      //  this is the actual call to the evaluator.
+      var outObj = await evaluate({textContent});
 
       //  results only
       if ({{$resultOnly}} == "true") {
@@ -274,7 +273,7 @@
     }
   };
 
-  //  onclick listener
+  //  this runs when the reset button is clicked.
   document.getElementById("reset{{$id}}").onclick = async function() {
     try {
       var lurkCode = document.getElementById("lurkcode{{$id}}");
@@ -300,6 +299,7 @@
     }
   };
 
+  //  Utility functions
   //  interval check
   function setImmediateInterval(funcToRun, ms) {
     funcToRun();
@@ -315,6 +315,7 @@
     return stringInverse;
   }
 
+  //  hack binding
   function renderParseLurkHugo(src) {
     // get the ::var:: and replace it with the value from localStorage
     console.log(src);
@@ -322,13 +323,48 @@
     var rep = src.replaceAll(re, function(match, p1) {
       return localStorage.getItem(p1);
     });
-    console.log(rep);
     return rep;
 
   }
 
+  function isSafari() {
+    if (navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+            navigator.userAgent && !navigator.userAgent.match('CriOS')) {
+      return true;
+    }
+    return false;
+  }
+
+  //  async evaluation call
+  async function evaluate(lurkExpression) {
+    //  check if browser is safari.
+    console.log(navigator.vendor);
+    if (isSafari()) {
+      var responseObj;
+      await axios.post('https://zaps-test.lurk-lang.org/eval', {
+        source: lurkExpression.textContent,
+      })
+              .then(function (response) {
+                console.log(response);
+                responseObj = {
+                  iterations: response.data.Evaluation.iterations,
+                  result: response.data.Evaluation.expr_out
+                }
+                console.log(responseObj);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+      return responseObj;
+    }else {
+      //  call wasm
+      var evaluationResult = await window.runExpressionEvaluator(lurkExpression);
+      var obj = JSON.parse(evaluationResult);
+      return obj;
+    }
+  }
+  //  any processes that needs to run on load and on an interval basis
   setImmediateInterval(checkRunEvaluatorHandler, 1000);
-  setImmediateInterval(dataCheck,1000);
 
   load();
 
