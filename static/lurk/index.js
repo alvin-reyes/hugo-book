@@ -2,6 +2,31 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/wasm-feature-detect/dist/esm/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/wasm-feature-detect/dist/esm/index.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "bigInt": () => (/* binding */ bigInt),
+/* harmony export */   "bulkMemory": () => (/* binding */ bulkMemory),
+/* harmony export */   "exceptions": () => (/* binding */ exceptions),
+/* harmony export */   "multiValue": () => (/* binding */ multiValue),
+/* harmony export */   "mutableGlobals": () => (/* binding */ mutableGlobals),
+/* harmony export */   "referenceTypes": () => (/* binding */ referenceTypes),
+/* harmony export */   "saturatedFloatToInt": () => (/* binding */ saturatedFloatToInt),
+/* harmony export */   "signExtensions": () => (/* binding */ signExtensions),
+/* harmony export */   "simd": () => (/* binding */ simd),
+/* harmony export */   "tailCall": () => (/* binding */ tailCall),
+/* harmony export */   "threads": () => (/* binding */ threads)
+/* harmony export */ });
+const bigInt=()=>(async e=>{try{return(await WebAssembly.instantiate(e)).instance.exports.b(BigInt(0))===BigInt(0)}catch(e){return!1}})(new Uint8Array([0,97,115,109,1,0,0,0,1,6,1,96,1,126,1,126,3,2,1,0,7,5,1,1,98,0,0,10,6,1,4,0,32,0,11])),bulkMemory=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,5,3,1,0,1,10,14,1,12,0,65,0,65,0,65,0,252,10,0,0,11])),exceptions=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,8,1,6,0,6,64,25,11,11])),multiValue=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,6,1,96,0,2,127,127,3,2,1,0,10,8,1,6,0,65,0,65,0,11])),mutableGlobals=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,2,8,1,1,97,1,98,3,127,1,6,6,1,127,1,65,0,11,7,5,1,1,97,3,1])),referenceTypes=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,7,1,5,0,208,112,26,11])),saturatedFloatToInt=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,12,1,10,0,67,0,0,0,0,252,0,26,11])),signExtensions=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,8,1,6,0,65,0,192,26,11])),simd=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,96,0,1,123,3,2,1,0,10,10,1,8,0,65,0,253,15,253,98,11])),tailCall=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,6,1,4,0,18,0,11])),threads=()=>(async e=>{try{return"undefined"!=typeof MessageChannel&&(new MessageChannel).port1.postMessage(new SharedArrayBuffer(1)),WebAssembly.validate(e)}catch(e){return!1}})(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,5,4,1,3,1,1,10,11,1,9,0,65,0,254,16,2,0,26,11]));
+
+
+/***/ }),
+
 /***/ "./pkg/index.js":
 /*!**********************!*\
   !*** ./pkg/index.js ***!
@@ -554,7 +579,7 @@ async function startWorkers(module, memory, builder) {
   \***************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "f1d42985087ac2639b83.wasm";
+module.exports = __webpack_require__.p + "/lurk/f1d42985087ac2639b83.wasm";
 
 /***/ }),
 
@@ -945,18 +970,6 @@ function generateUUID() {
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -1021,22 +1034,7 @@ function generateUUID() {
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 		__webpack_require__.p = "";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
@@ -1137,69 +1135,83 @@ var __webpack_exports__ = {};
   !*** ./js/index.js ***!
   \*********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _pkg_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pkg/index.js */ "./pkg/index.js");
-/* harmony import */ var comlink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! comlink */ "./node_modules/comlink/dist/esm/comlink.mjs");
+/* harmony import */ var _pkg_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pkg/index.js */ "./pkg/index.js");
+/* harmony import */ var comlink__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! comlink */ "./node_modules/comlink/dist/esm/comlink.mjs");
+/* harmony import */ var wasm_feature_detect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! wasm-feature-detect */ "./node_modules/wasm-feature-detect/dist/esm/index.js");
+
 
 
 
 var originalContents;
-
+    let runExpressionEvaluator;
+    let runExpressionEvaluatorHandlers;
 (async function() {
-  await (0,_pkg_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])();
-  originalContents = document.getElementById("lurkcode").textContent;
+  
+  if (await (0,wasm_feature_detect__WEBPACK_IMPORTED_MODULE_0__.threads)()) {
+    console.log("webassembly threads supported.")
+  } else {
+    console.log("webassembly threads not supported!!!")
+  }
+
+  await (0,_pkg_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
+
+  //originalContents = document.getElementById("lurkcode").textContent;
   HighlightLisp.highlight_auto();
   HighlightLisp.paren_match();
   
   // Create a separate thread from wasm-worker.js and get a proxy to its handlers.
-  let handlers = await comlink__WEBPACK_IMPORTED_MODULE_1__.wrap(
-    new Worker(new URL(/* worker import */ __webpack_require__.p + __webpack_require__.u("js_wasm-worker_js"), __webpack_require__.b), {
+  let handlers = await comlink__WEBPACK_IMPORTED_MODULE_2__.wrap(
+    new Worker(new URL(/* worker import */ __webpack_require__.p + __webpack_require__.u("/lurk/js_wasm-worker_js"), __webpack_require__.b), {
       type: undefined
     })
   ).handlers;
 
   console.log('Worker Threads LOADED');
-  var output_container = document.getElementById("lurk-code-component-controls");
-  output_container.style.display = "block";
+  //var output_container = document.getElementById("lurk-code-component-controls");
+  //output_container.style.display = "block";
 
-  // let handler = handlers['singleThread'];
-  let handler = handlers['multiThread'];
+  let handler = handlers['singleThread'];
+  //let handler = handlers['multiThread'];
   // If handler doesn't exist, it's not supported.
   if (!handler) return;
 
-  var btn = document.getElementById('run');
-  btn.onclick = async function (e) {
-      var output_container = document.getElementById("output-container");
-      output_container.style.display = "block";
-      var lurkcode = document.getElementById("lurkcode");        
-      var output = document.getElementById("output");
-      try {
-          output.textContent ="processing... ";
-          let textContent = lurkcode.textContent;
-          let out = await handler({textContent});
-          //var out = module.execute_lurk(lurkcode.textContent);
-          var outObj = JSON.parse(out);
-          output.textContent = "Iterations: " + outObj.iterations + "\nResult: " + outObj.result;
-      } catch (error) {
-          console.log(error);
-          output.textContent ="Iterations: 0 \nResult: ERROR: " + error;
-          return false;
-      }
-      
-      return false;
-  };
-  var resetBtn = document.getElementById('reset');
-  resetBtn.onclick = function (e) {
-      document.getElementById("lurkcode").textContent = originalContents;
-      HighlightLisp.highlight_auto();
-      HighlightLisp.paren_match();
-      var output_container = document.getElementById("output-container");
-      output_container.style.display = "none";
-  }
+    window.runExpressionEvaluatorHandlers = handlers;
+    window.runExpressionEvaluator = handler;
 
-  document.addEventListener("update-progress", (event) => {
-      var output = document.getElementById("output");
-      output.textContent = event.detail.message();
-  });
+  // var btn = document.getElementById('run');
+  // btn.onclick = async function (e) {
+  //     var output_container = document.getElementById("output-container");
+  //     output_container.style.display = "block";
+  //     var lurkcode = document.getElementById("lurkcode");
+  //     var output = document.getElementById("output");
+  //     try {
+  //         output.textContent ="processing... ";
+  //         let textContent = lurkcode.textContent;
+  //         let out = await handler({textContent});
+  //         //var out = module.execute_lurk(lurkcode.textContent);
+  //         var outObj = JSON.parse(out);
+  //         output.textContent = "Iterations: " + outObj.iterations + "\nResult: " + outObj.result;
+  //     } catch (error) {
+  //         console.log(error);
+  //         output.textContent ="Iterations: 0 \nResult: ERROR: " + error;
+  //         return false;
+  //     }
+  //
+  //     return false;
+  // };
+  // var resetBtn = document.getElementById('reset');
+  // resetBtn.onclick = function (e) {
+  //     document.getElementById("lurkcode").textContent = originalContents;
+  //     HighlightLisp.highlight_auto();
+  //     HighlightLisp.paren_match();
+  //     var output_container = document.getElementById("output-container");
+  //     output_container.style.display = "none";
+  // }
+  //
+  // document.addEventListener("update-progress", (event) => {
+  //     var output = document.getElementById("output");
+  //     output.textContent = event.detail.message();
+  // });
 
   /*
   setupBtn('singleThread');

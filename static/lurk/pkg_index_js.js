@@ -435,7 +435,7 @@ async function init(input, maybe_memory) {
   \***************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "f1d42985087ac2639b83.wasm";
+module.exports = __webpack_require__.p + "/lurk/f1d42985087ac2639b83.wasm";
 
 /***/ })
 
